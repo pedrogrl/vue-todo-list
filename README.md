@@ -5,14 +5,9 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development//Starts json-server
 ```
 npm run serve
-```
-
-### Json-server
-```
-npm run backend
 ```
 
 ### Compiles and minifies for production
