@@ -3,6 +3,7 @@
         <div class="w-full sm:w-1/2 lg:w-1/3 mx-auto">
 
             <TodoSpinner v-if="loading"/>
+
             <template v-else>
                 <TodoFormAdd />
 

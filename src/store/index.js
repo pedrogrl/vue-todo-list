@@ -11,6 +11,9 @@ export default createStore({
   mutations: {
     storeTodos(state, data){
       state.todos = data
+    },
+    storeTodo(state, data){
+      state.todos.unshift(data)
     }
   },
   actions: {
@@ -25,6 +28,11 @@ export default createStore({
           })
         }, 500);
       }))
+    },
+
+    addTodo({commit}, data){
+      return axios.post('todos', data)
+        .then(res => commit('storeTodo', res.data))
     }
   },
   modules: {
