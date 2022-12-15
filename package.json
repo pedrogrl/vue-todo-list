@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "concurrently \"vue-cli-service serve\" \"json-server --watch db.json\"",
+    "build": "concurrently \"vue-cli-service build\" \"json-server --watch db.json\"",
     "lint": "vue-cli-service lint",
     "backend": "json-server --watch db.json"
   },
   "dependencies": {
     "axios": "^1.2.1",
+    "concurrently": "^7.6.0",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vuex": "^4.0.0"
