@@ -9,11 +9,6 @@
       "title": "Estudar Vue",
       "completed": false,
       "id": 2
-    },
-    {
-      "title": "Estudar composition API",
-      "completed": false,
-      "id": 3
     }
   ]
 }

@@ -13,7 +13,19 @@ export default createStore({
       state.todos = data
     },
     storeTodo(state, data){
-      state.todos.unshift(data)
+      const index = state.todos.findIndex(todo => todo.id === data.id)
+      if(index > -1){
+        state.todos.splice(index, 1, data)
+      } else {
+        state.todos.unshift(data)
+      }
+    },
+
+    deleteTodo(state, id){
+      const index = state.todos.findIndex(todo => todo.id === id)
+      if(index > -1){
+        state.todos.splice(index, 1)
+      }
     }
   },
   actions: {
@@ -35,9 +47,15 @@ export default createStore({
         .then(res => commit('storeTodo', res.data))
     },
 
-    updateTodo(ctx, {id, info}){
+    updateTodo({commit}, {id, info}){
       return axios.put(`todos/${id}`, info)
-    }
+        .then(res => commit('storeTodo', res.data))
+    },
+
+    deleteTodo({commit}, id){
+      return axios.delete(`todos/${id}`)
+        .then(() => commit('deleteTodo', id))
+    },
   },
   modules: {
   }
