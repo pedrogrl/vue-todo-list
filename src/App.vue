@@ -6,10 +6,12 @@
 
             <template v-else>
                 <TodoFormAdd />
-
-                <TodoItems />
-
-                <TodoEmpty />
+                <TodoItems
+                    v-if="$store.state.todos.length"
+                />
+                <TodoEmpty
+                    v-else
+                />
             </template>
 
         </div>
@@ -33,8 +35,8 @@ export default {
     },
 
     created() {
-      this.$store.dispatch('getTodos')
-        .finally(() => this.loading = false)
+        this.$store.dispatch('getTodos')
+            .finally(() => this.loading = false)
     },
 };
 </script>
