@@ -40,6 +40,6 @@ export default {
             })
             .finally(() => this.title = '')}
         }
-    }
+    },
 }
 </script>

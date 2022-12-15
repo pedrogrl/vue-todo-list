@@ -14,6 +14,10 @@
 import TodoItem from './TodoItem.vue'; 
 
 export default {
-    components: {TodoItem}
+    components: {TodoItem},
+
+    beforeCreate(){
+        this.$store.state.todos.reverse()
+    }
 }
 </script>

@@ -33,6 +33,10 @@ export default createStore({
     addTodo({commit}, data){
       return axios.post('todos', data)
         .then(res => commit('storeTodo', res.data))
+    },
+
+    updateTodo(ctx, {id, info}){
+      return axios.put(`todos/${id}`, info)
     }
   },
   modules: {
