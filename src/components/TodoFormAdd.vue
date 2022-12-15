@@ -24,22 +24,31 @@
 
 
 <script>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
-    data(){
+    setup(){
+        const title = ref('')
+        const store = useStore()
+
+        const addTodo = () => {
+            if(title.value){
+                store.dispatch('addTodo', {
+                title: title.value,
+                completed: false
+            })
+            .finally(() => title.value = '')}
+        }
+
         return {
-            title: ''
+            title,
+            addTodo
         }
     },
 
     methods: {
-        addTodo(){
-            if(this.title){
-                this.$store.dispatch('addTodo', {
-                title: this.title,
-                completed: false
-            })
-            .finally(() => this.title = '')}
-        }
+        
     },
 }
 </script>

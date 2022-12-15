@@ -68,14 +68,10 @@
 </template>
 
 <script>
-export default {
-    data(){
-        return {
-            title: this.todo.title,
-            isCompleted: this.todo.completed
-        }
-    },
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 
+export default {
     props: {
         todo: {
             type: Object,
@@ -83,32 +79,54 @@ export default {
         }
     },
 
-    methods: {
-        updateTodo(){
+    setup(props){
+        const title = ref(props.todo.title)
+        const isCompleted = ref(props.todo.completed)
+        const store = useStore()
+
+        const updateTodo = () => {
             const data = {
-                id: this.todo.id,
+                id: props.todo.id,
                 info: {
-                    title: this.title,
-                    completed: this.isCompleted
+                    title: title.value,
+                    completed: isCompleted.value
                 }
             }
-            this.$store.dispatch('updateTodo', data)
-        },
-
-        checkTitle(){
-            if (!this.title) return;     
-
-            this.updateTodo()
-        },
-
-        clickCheckmark(){
-            this.isCompleted = !this.isCompleted
-            this.updateTodo()
-        },
-
-        deleteTodo(){
-            this.$store.dispatch('deleteTodo', this.todo.id)
+            store.dispatch('updateTodo', data)
         }
+
+        const checkTitle = () => {
+            if (!title.value) return;     
+
+            updateTodo()
+        }
+
+        const clickCheckmark = () => {
+            isCompleted.value = !isCompleted.value
+            updateTodo()
+        }
+        
+        const deleteTodo = () => {
+            store.dispatch('deleteTodo', props.todo.id)
+        }
+
+        return {
+            title,
+            isCompleted,
+            checkTitle,
+            clickCheckmark,
+            deleteTodo
+        }
+    },
+
+    methods: {
+        
+
+
+
+        
+
+        
     },
 }
 </script>
